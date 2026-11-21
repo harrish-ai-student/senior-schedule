@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --color-page: #f7f6f2;
+  --color-card: #ffffff;
+  --color-ink: #141414;
+  --color-muted: #3a3a3a;
+  --color-accent: #0a4a82;
+  --color-line: #3b3b3b;
+  --color-danger: #8a1010;
+  /* Never below 18px at the 20px base. */
+  --text-xs: 0.9rem;
+  --text-sm: 0.9rem;
+  --font-sans: var(--font-noto), var(--font-noto-sc), var(--font-noto-tamil), system-ui, sans-serif;
+}
+
+html {
+  font-size: 20px;
+  background: var(--color-page);
+}
+
+body {
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+h1,
+h2 {
+  line-height: 1.6;
+}
+
+:focus-visible {
+  outline: 4px solid #000000;
+  outline-offset: 3px;
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 56px;
+    padding: 0.5rem 1.1rem;
+    border-radius: 0.6rem;
+    border: 2px solid var(--color-line);
+    background: var(--color-card);
+    color: var(--color-ink);
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #ffffff;
+  }
+  .btn-danger {
+    background: var(--color-danger);
+    border-color: var(--color-danger);
+    color: #ffffff;
+  }
+  .btn[aria-pressed="true"] {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #ffffff;
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 1;
+    border-style: dashed;
+  }
+}
+
+/* The only animation in the app: shows the microphone is listening. */
+@keyframes listening-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 6px var(--color-page), 0 0 0 12px var(--color-danger);
+  }
+  50% {
+    box-shadow: 0 0 0 6px var(--color-page), 0 0 0 22px var(--color-danger);
+  }
+}
+.listening-ring {
+  /* Static ring for reduced motion; animated below otherwise. */
+  box-shadow: 0 0 0 6px var(--color-page), 0 0 0 12px var(--color-danger);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .listening-ring {
+    animation: listening-pulse 1.6s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

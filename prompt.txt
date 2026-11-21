@@ -1,0 +1,203 @@
+# Build: Senior Schedule Web App
+
+Build a small web app that lets senior citizens add events to a schedule by voice, by typing, or by pressing buttons, and then reminds them when the event is near. Build exactly what is listed here. Do not add features, pages or libraries that are not listed.
+
+## 1. Users and constraints
+- Users are elderly, many with low vision, tremor, or little experience with apps.
+- Every screen must work with one finger and no gestures (no swipe, long-press, drag, double-tap, hover).
+- No login, no accounts. Data stays on the device.
+- Languages: English, Malay, Chinese (Simplified), Tamil. The user can switch at any time.
+- Timezone: use the device timezone. Default to Asia/Kuala_Lumpur if unavailable.
+
+## 2. Stack
+- Next.js (App Router) + TypeScript + Tailwind CSS
+- Storage: localStorage (wrap in one `storage.ts` module so it can be swapped for a database later)
+- AI: Gemini API, called only from a Next.js route handler (`/api/parse`). The API key must never reach the browser.
+- Validation: zod
+- Voice input: Web Speech API (`SpeechRecognition`)
+- Voice output: `speechSynthesis`
+- Deploy target: Vercel
+- Env vars: `GEMINI_API_KEY`, `GEMINI_MODEL` (use a current Gemini Flash model; check Google's docs for the exact name, do not hardcode a guess)
+
+## 3. Languages
+- Supported codes: `en`, `ms`, `zh`, `ta`.
+- All UI text lives in `/locales/{en,ms,zh,ta}.json`. No hardcoded strings in components.
+- Write the English file first. Translate it into the other three. Natural, simple, everyday wording, not formal or literal. Add a comment at the top of `ms.json`, `zh.json` and `ta.json` saying a native speaker should review it.
+- First launch: a full-screen language chooser with four large buttons, each labelled in its own language: English, Bahasa Melayu, 中文, தமிழ். Save the choice. Show a language button in the header on every screen to change it later.
+- Set `<html lang>` to match the chosen language.
+- Format dates and times with `Intl.DateTimeFormat` using these locales: `en-MY`, `ms-MY`, `zh-CN`, `ta-IN`. Avoid abbreviations; write out the weekday and month.
+- Fonts: Noto Sans, Noto Sans SC, Noto Sans Tamil via `next/font`. Use line-height 1.6 or more so Tamil script is not cramped.
+- Speech recognition language codes: `en-MY`, `ms-MY`, `zh-CN`, `ta-IN`.
+- Spoken reminders use the matching `speechSynthesis` voice. If no voice exists for the language on the device (common for Tamil), skip speech and rely on sound and text. Do not show an error.
+- The Gemini prompt (section 7) must accept all four languages, including mixed-language input such as Malay with English words.
+
+## 4. Screens
+
+### 4.1 Home
+Top to bottom:
+1. Header: app name on the left, language button and text-size button on the right.
+2. Three tabs: **Today**, **1 Week**, **1 Month**. "1 Week" means the next 7 days including today. "1 Month" means the next 30 days.
+3. Summary list for the selected tab, sorted by date then time. Each row shows: event name, category label, date and time, and a "days left" label on the right ("Today", "Tomorrow", "In 3 days"; localized). Tap a row to open the edit screen.
+4. Empty state: one sentence and an arrow pointing to the buttons below. Example: "Nothing planned. Add your first event."
+5. Three large buttons, fixed at the bottom of the screen: **Speak**, **Type**, **Quick add**. Each has an icon and a text label. Never icon only.
+
+### 4.2 Speak
+- Full-screen. One huge microphone button. States: ready, listening (show "Listening..." and a clear visual change), processing.
+- Show the live transcript in large text.
+- When the user stops talking, send the transcript to `/api/parse` automatically and go to the Confirm screen.
+- Always show a "Cancel" button.
+- If `SpeechRecognition` is unsupported or the microphone permission is denied, show a plain message with one button: "Use Type instead". Hide nothing silently.
+
+### 4.3 Type
+- One large multi-line text box with a placeholder example in the chosen language, e.g. "Doctor appointment next Tuesday at 10am".
+- One large **Next** button. Show a loading state while waiting for Gemini.
+- On AI failure or timeout (10 seconds), open the Manual form (4.5) with the typed text copied into the Event name field. Show a short message: "Could not read that. Please check the details."
+
+### 4.4 Quick add (buttons only, one question per screen)
+Step 1, what is it? Large buttons: Doctor, Medicine, Exercise, Meet someone, Class, Other. Mapping: Doctor, Medicine, Exercise → Health; Meet someone → Social; Class → Education; Other → custom.
+Step 2, with whom or where? (optional) A text box and a **Skip** button. Label depends on step 1, e.g. "Which doctor or clinic?" or "Who are you meeting?".
+Step 3, which day? Buttons: Today, Tomorrow, **Pick a date** (opens a large date picker).
+Step 4, what time? Buttons: Morning 9:00, Afternoon 2:00, Evening 6:00, **Pick a time** (large time picker).
+Then go to the Confirm screen. Show Back on every step.
+
+### 4.5 Manual form (matches the paper sketch; used for editing and as the AI fallback)
+Fields, in order:
+- Event name (text)
+- Category chips: Health, Social, Education, plus a **+ Add category** button that asks for a name and saves it as a new chip
+- Date (large date picker)
+- Time (large time picker), with an "All day" toggle
+- Where / with whom (optional)
+Buttons: **Save**, **Cancel**, and on edit only **Delete**. Delete opens a confirmation dialog with two large buttons, "Yes, delete" and "No, keep it".
+Date and time must not be in the past. Show a plain-language error under the field.
+
+### 4.6 Confirm
+- Large card: event name, category, full date with weekday, time.
+- If the input came from voice or typing, show the original text under the card ("You said: ...").
+- Two buttons: **Yes, save** (primary) and **Change** (opens Manual form pre-filled).
+- If Gemini reported missing fields, ask for them here with one large question per missing field ("What time?", "Which day?"), using the same pickers as Quick add. Never guess a missing date or time.
+- Nothing is saved until the user presses **Yes, save**.
+
+### 4.7 Reminder alert
+- Full-screen overlay that covers the app when a reminder fires.
+- Shows the event name and time in very large text.
+- Plays a gentle repeating sound until dismissed. Speaks the event name and time aloud if a voice is available.
+- Buttons: **OK, I know** (dismisses and marks the reminder done) and **Remind me in 10 minutes**.
+- Does not auto-dismiss.
+
+### 4.8 Settings (reachable from the header)
+- Language (4 buttons)
+- Text size: Normal / Large / Extra large (scales the root font size; base is 20px)
+- Reminder timing: "Remind me: at the time / 30 minutes before / 1 hour before / 1 day before". Multiple can be on. Default: 30 minutes before and at the time.
+- Sound on/off
+- A button "Allow notifications" that requests Notification permission. Never request permission on page load.
+
+## 5. Data model
+```ts
+type Category = { id: string; key?: "health" | "social" | "education"; label?: string }; // key = built-in (localized), label = custom
+type EventItem = {
+  id: string;
+  title: string;
+  categoryId: string;
+  date: string;        // YYYY-MM-DD, local
+  time: string | null; // HH:mm 24h, null = all day
+  place: string | null;
+  createdAt: string;   // ISO
+  source: "voice" | "text" | "quick" | "manual";
+  firedReminders: string[]; // e.g. ["-30m","0m"], prevents duplicate alerts
+};
+type Settings = { lang: "en"|"ms"|"zh"|"ta"; textSize: "normal"|"large"|"xl"; leadTimes: string[]; sound: boolean };
+```
+All-day events remind at 08:00 local time on the day.
+
+## 6. Reminder engine
+- Runs client-side while the app is open. Check every 20 seconds against all upcoming events and the selected lead times.
+- Fire each reminder once (use `firedReminders`). On app load, fire any reminder that was due within the last 30 minutes and not yet fired; ignore older ones.
+- When firing: show the Reminder alert overlay, play sound, speak, and also send a browser Notification if permission is granted.
+- Put the scheduler in `lib/reminders.ts` with no UI code, so a Web Push implementation can replace it later.
+- Add a small notice on the Home screen: "Keep this page open to get reminders." Localized. Do not hide this limitation.
+
+## 7. Gemini route: `POST /api/parse`
+Request body: `{ text: string, lang: "en"|"ms"|"zh"|"ta", nowISO: string, timezone: string }`
+- Reject text over 500 characters.
+- Do not log the text or the response anywhere. Events can contain medical information.
+- Add simple rate limiting (e.g. 20 requests per minute per IP, in memory).
+- Use Gemini structured output: `responseMimeType: "application/json"` with a `responseSchema` matching the shape below. Also validate the result with zod. If validation fails, return `{ error: "parse_failed" }` with status 422.
+
+Response shape:
+```json
+{
+  "title": "string, max 60 chars, no date or time words, in the same language as the input",
+  "category": "health | social | education | other",
+  "date": "YYYY-MM-DD or null",
+  "time": "HH:mm (24h) or null",
+  "place": "string or null",
+  "missing": ["title" | "date" | "time"]
+}
+```
+
+System instruction (use this text):
+```
+You extract exactly one calendar event from text written or spoken by an elderly person.
+The text may be in English, Malay, Simplified Chinese or Tamil, and may mix languages.
+Current local date and time: {nowISO}. Timezone: {timezone}.
+Return only JSON that matches the schema. No explanation.
+
+Rules:
+- Resolve relative dates from the current date: today, tomorrow, the day after tomorrow, "next Tuesday", "this Friday", "in 3 days".
+- A bare weekday means its next occurrence on or after today.
+- Time words: morning = 09:00, afternoon = 14:00, evening = 18:00, night = 20:00. Only use these when no exact time is given.
+- Convert all times to 24-hour HH:mm.
+- Never invent a date, time or title. If a value is not stated or cannot be worked out, set it to null and list it in "missing".
+- title: short and plain, written in the same language as the input. Do not include the date or time in the title.
+- category: health = doctor, clinic, hospital, medicine, therapy, exercise, walking, gym. social = meeting friends or family, visits, prayers, temple, mosque, church, community events. education = class, course, lesson, workshop. other = everything else. If an event fits more than one, health wins.
+- place: location or the person being met, if stated, otherwise null.
+```
+
+Client side: after the response, check that the datetime is not in the past. If it is, send the user to the Confirm screen with the date marked as missing.
+
+## 8. Accessibility and design rules
+- Base font size 20px. Headings 28px or more. Never go below 18px anywhere.
+- Contrast ratio of 7:1 or better for text. Do not use color alone to show meaning.
+- Buttons at least 56px high, with at least 12px spacing between them. Primary buttons span the full width on phones.
+- Every button has a text label. Icons are extras.
+- No toasts or messages that disappear on their own. Messages stay until the user acts.
+- No timeouts on any screen except the 10-second AI call.
+- Visible focus outline on all interactive elements. Full keyboard operation. `aria-label` on every control, `aria-live` for the transcript and errors.
+- Respect `prefers-reduced-motion`. No animations beyond the listening indicator.
+- Layout: single column, mobile first, max width 640px centered on desktop.
+- Visual style: plain and calm. Light background, dark text, one accent color for primary buttons. No gradients, no decorative illustrations.
+- Error messages: say what happened and what to do, in one short sentence. No technical terms.
+
+## 9. File structure
+```
+/app
+  layout.tsx, page.tsx
+  /api/parse/route.ts
+/components   (Home, Tabs, EventRow, SpeakScreen, TypeScreen, QuickAdd, EventForm, ConfirmCard, ReminderAlert, Settings, LanguagePicker)
+/lib          (storage.ts, reminders.ts, dates.ts, i18n.ts, gemini.ts, schema.ts)
+/locales      (en.json, ms.json, zh.json, ta.json)
+```
+
+## 10. Build order
+Build in these steps. After each step, stop, tell me how to run it and what to test, then continue only when I say so.
+1. Project setup, i18n, language chooser, settings, text size.
+2. Data model, storage, Home screen with tabs and list, Manual form (add, edit, delete).
+3. Quick add flow and Confirm screen.
+4. `/api/parse` route and Type screen.
+5. Speak screen with Web Speech API.
+6. Reminder engine, Reminder alert, notification permission.
+7. Accessibility pass and fixes.
+
+## 11. Out of scope for v1
+Login, cloud sync, family sharing, recurring events, Web Push, WhatsApp or SMS reminders, calendar import, multiple events from one sentence.
+
+## 12. Done means
+- All three input methods end on the Confirm screen and save only after "Yes, save".
+- Every screen works in all four languages with no untranslated or cut-off text.
+- Typing "Doctor appointment next Tuesday 10am" in each of the four languages produces the correct event.
+- A reminder fires once, shows the full-screen alert, and "Remind me in 10 minutes" works.
+- With the Gemini key removed or the network off, the user can still add events through Quick add and the Manual form.
+- Lighthouse accessibility score is 95 or higher.
+
+## 13. Code rules
+Complete, runnable code. No TODOs, no placeholder functions, no pseudo-code. Short comments only where the logic is not obvious. Do not add dependencies beyond Next.js, React, Tailwind, zod and the official Google Gen AI SDK without asking me first.

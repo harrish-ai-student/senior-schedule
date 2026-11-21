@@ -1,0 +1,217 @@
+{
+  "_comment": "Machine-assisted translation. A native Malay speaker should review this file.",
+  "app": {
+    "name": "Jadual Saya"
+  },
+  "language": {
+    "name": "Bahasa Melayu",
+    "choose": "Pilih bahasa anda",
+    "button": "Bahasa",
+    "buttonAria": "Tukar bahasa. Sekarang: Bahasa Melayu"
+  },
+  "header": {
+    "textSize": "Saiz tulisan",
+    "textSizeAria": "Saiz tulisan sekarang {size}. Tekan untuk tukar ke {next}.",
+    "settings": "Tetapan",
+    "settingsAria": "Buka tetapan",
+    "navAria": "Bahasa, saiz tulisan dan tetapan"
+  },
+  "textSize": {
+    "normal": "Biasa",
+    "large": "Besar",
+    "xl": "Sangat besar"
+  },
+  "settings": {
+    "title": "Tetapan",
+    "language": "Bahasa",
+    "textSize": "Saiz tulisan",
+    "reminders": "Ingatkan saya:",
+    "remindersHint": "Anda boleh pilih lebih daripada satu.",
+    "remindersNone": "Tiada masa peringatan dipilih. Anda tidak akan dapat peringatan.",
+    "sound": "Bunyi",
+    "on": "Hidup",
+    "off": "Tutup",
+    "selected": "Dipilih",
+    "notSelected": "Tidak dipilih",
+    "done": "Siap",
+    "doneAria": "Tutup tetapan dan kembali"
+  },
+  "lead": {
+    "0m": "Tepat pada masanya",
+    "-30m": "30 minit sebelum",
+    "-60m": "1 jam sebelum",
+    "-1d": "1 hari sebelum"
+  },
+  "common": {
+    "back": "Kembali",
+    "backAria": "Kembali ke skrin tadi"
+  },
+  "home": {
+    "tabsAria": "Pilih apa yang hendak dilihat",
+    "tab": {
+      "today": "Hari ini",
+      "week": "1 Minggu",
+      "month": "1 Bulan"
+    },
+    "empty": "Tiada rancangan. Tambah acara pertama anda.",
+    "notice": "Biarkan halaman ini terbuka untuk dapat peringatan.",
+    "speak": "Cakap",
+    "type": "Taip",
+    "quick": "Tambah cepat",
+    "speakAria": "Tambah acara dengan bercakap",
+    "typeAria": "Tambah acara dengan menaip",
+    "quickAria": "Tambah acara dengan butang",
+    "addNav": "Tambah acara"
+  },
+  "days": {
+    "today": "Hari ini",
+    "tomorrow": "Esok",
+    "inDays": "Lagi {n} hari"
+  },
+  "time": {
+    "allDay": "Sepanjang hari"
+  },
+  "category": {
+    "health": "Kesihatan",
+    "social": "Sosial",
+    "education": "Pendidikan",
+    "other": "Lain-lain"
+  },
+  "form": {
+    "titleAdd": "Acara baru",
+    "titleEdit": "Ubah acara",
+    "name": "Nama acara",
+    "category": "Kategori",
+    "addCategory": "+ Tambah kategori",
+    "newCategoryName": "Nama kategori baru",
+    "addCategorySave": "Tambah",
+    "addCategoryCancel": "Batal",
+    "date": "Tarikh",
+    "time": "Masa",
+    "allDay": "Sepanjang hari",
+    "place": "Di mana / dengan siapa (tidak wajib)",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Padam",
+    "errors": {
+      "name": "Sila taip nama acara.",
+      "category": "Sila pilih kategori.",
+      "datePast": "Tarikh ini sudah lepas. Sila pilih hari ini atau hari kemudian.",
+      "timePast": "Masa ini sudah lepas. Sila pilih masa yang lebih lewat.",
+      "categoryName": "Sila taip nama kategori."
+    }
+  },
+  "datePicker": {
+    "prevDay": "Hari sebelumnya",
+    "nextDay": "Hari berikutnya",
+    "prevWeek": "Minggu sebelumnya",
+    "nextWeek": "Minggu berikutnya",
+    "prevMonth": "Bulan sebelumnya",
+    "nextMonth": "Bulan berikutnya"
+  },
+  "timePicker": {
+    "hourEarlier": "1 jam lebih awal",
+    "hourLater": "1 jam lebih lewat",
+    "minEarlier": "5 minit lebih awal",
+    "minLater": "5 minit lebih lewat"
+  },
+  "confirmDelete": {
+    "title": "Padam acara ini?",
+    "yes": "Ya, padam",
+    "no": "Tidak, simpan"
+  },
+  "quick": {
+    "title": "Tambah cepat",
+    "stepOf": "Langkah {n} daripada 4",
+    "step1": "Apa acaranya?",
+    "types": {
+      "doctor": "Doktor",
+      "medicine": "Ubat",
+      "exercise": "Senaman",
+      "meet": "Jumpa orang",
+      "class": "Kelas",
+      "other": "Lain-lain"
+    },
+    "defaultTitle": {
+      "doctor": "Temujanji doktor",
+      "medicine": "Makan ubat",
+      "exercise": "Senaman",
+      "meet": "Jumpa orang",
+      "class": "Kelas",
+      "other": "Acara"
+    },
+    "step2": {
+      "doctor": "Doktor atau klinik mana?",
+      "medicine": "Di mana anda akan makan ubat?",
+      "exercise": "Di mana anda akan bersenam?",
+      "meet": "Anda jumpa siapa?",
+      "class": "Kelas apa, atau di mana?",
+      "other": "Di mana, atau dengan siapa?"
+    },
+    "step2Hint": "Anda boleh langkau soalan ini.",
+    "step3": "Hari apa?",
+    "today": "Hari ini",
+    "tomorrow": "Esok",
+    "pickDate": "Pilih tarikh",
+    "step4": "Pukul berapa?",
+    "morning": "Pagi",
+    "afternoon": "Tengah hari",
+    "evening": "Petang",
+    "pickTime": "Pilih masa",
+    "next": "Seterusnya",
+    "skip": "Langkau"
+  },
+  "confirm": {
+    "title": "Adakah ini betul?",
+    "name": "Acara",
+    "category": "Kategori",
+    "date": "Hari",
+    "time": "Masa",
+    "place": "Di mana / dengan siapa",
+    "youSaid": "Anda kata: “{text}”",
+    "yes": "Ya, simpan",
+    "change": "Ubah",
+    "notSet": "Belum ditetapkan",
+    "askTitle": "Apa nama acara ini?",
+    "askDate": "Hari apa?",
+    "askTime": "Pukul berapa?"
+  },
+  "type": {
+    "title": "Taip acara anda",
+    "label": "Apa yang anda mahu tambah?",
+    "placeholder": "Jumpa doktor Selasa depan pukul 10 pagi",
+    "next": "Seterusnya",
+    "reading": "Sedang membaca apa yang anda taip…",
+    "empty": "Sila taip apa yang anda mahu tambah.",
+    "failed": "Tidak dapat membaca itu. Sila semak butirannya."
+  },
+  "speak": {
+    "title": "Sebut acara anda",
+    "ready": "Tekan mikrofon, kemudian sebut apa yang anda mahu tambah.",
+    "example": "Contohnya: “{text}”",
+    "micStart": "Tekan untuk bercakap",
+    "listening": "Sedang mendengar...",
+    "micStop": "Tekan bila sudah habis",
+    "processing": "Sedang memproses…",
+    "heard": "Saya dengar:",
+    "noSpeech": "Saya tidak dengar apa-apa. Tekan mikrofon dan cuba lagi.",
+    "failed": "Mikrofon tidak berfungsi. Sila cuba lagi.",
+    "unsupported": "Fungsi bercakap tidak ada dalam pelayar ini.",
+    "denied": "Halaman ini tidak dibenarkan guna mikrofon.",
+    "useType": "Guna Taip",
+    "cancel": "Batal"
+  },
+  "reminder": {
+    "label": "Peringatan",
+    "ok": "OK, saya tahu",
+    "snooze": "Ingatkan saya 10 minit lagi"
+  },
+  "notify": {
+    "title": "Pemberitahuan",
+    "hint": "Pemberitahuan menunjukkan peringatan walaupun halaman ini di belakang tetingkap lain.",
+    "allow": "Benarkan pemberitahuan",
+    "granted": "Pemberitahuan sudah dihidupkan.",
+    "denied": "Pemberitahuan disekat. Anda boleh benarkannya dalam tetapan pelayar.",
+    "unsupported": "Pelayar ini tidak boleh menunjukkan pemberitahuan."
+  }
+}

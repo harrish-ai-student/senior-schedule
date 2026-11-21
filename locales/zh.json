@@ -1,0 +1,217 @@
+{
+  "_comment": "机器辅助翻译。请母语为中文的人士审阅此文件。 Machine-assisted translation. A native Chinese speaker should review this file.",
+  "app": {
+    "name": "我的日程"
+  },
+  "language": {
+    "name": "中文",
+    "choose": "请选择语言",
+    "button": "语言",
+    "buttonAria": "更换语言。现在：中文"
+  },
+  "header": {
+    "textSize": "字体大小",
+    "textSizeAria": "字体现在是{size}。按一下改成{next}。",
+    "settings": "设置",
+    "settingsAria": "打开设置",
+    "navAria": "语言、字体大小和设置"
+  },
+  "textSize": {
+    "normal": "标准",
+    "large": "大",
+    "xl": "特大"
+  },
+  "settings": {
+    "title": "设置",
+    "language": "语言",
+    "textSize": "字体大小",
+    "reminders": "提醒我：",
+    "remindersHint": "可以选多个。",
+    "remindersNone": "还没有选提醒时间，您不会收到提醒。",
+    "sound": "声音",
+    "on": "开",
+    "off": "关",
+    "selected": "已选",
+    "notSelected": "未选",
+    "done": "完成",
+    "doneAria": "关闭设置并返回"
+  },
+  "lead": {
+    "0m": "准时提醒",
+    "-30m": "提前30分钟",
+    "-60m": "提前1小时",
+    "-1d": "提前1天"
+  },
+  "common": {
+    "back": "返回",
+    "backAria": "返回上一页"
+  },
+  "home": {
+    "tabsAria": "选择要看的内容",
+    "tab": {
+      "today": "今天",
+      "week": "1周",
+      "month": "1个月"
+    },
+    "empty": "还没有安排。添加您的第一个活动吧。",
+    "notice": "请保持这个页面打开，才能收到提醒。",
+    "speak": "说话",
+    "type": "打字",
+    "quick": "快速添加",
+    "speakAria": "用说话添加活动",
+    "typeAria": "用打字添加活动",
+    "quickAria": "用按钮添加活动",
+    "addNav": "添加活动"
+  },
+  "days": {
+    "today": "今天",
+    "tomorrow": "明天",
+    "inDays": "{n}天后"
+  },
+  "time": {
+    "allDay": "全天"
+  },
+  "category": {
+    "health": "健康",
+    "social": "社交",
+    "education": "学习",
+    "other": "其他"
+  },
+  "form": {
+    "titleAdd": "新活动",
+    "titleEdit": "修改活动",
+    "name": "活动名称",
+    "category": "类别",
+    "addCategory": "+ 添加类别",
+    "newCategoryName": "新类别的名称",
+    "addCategorySave": "添加",
+    "addCategoryCancel": "取消",
+    "date": "日期",
+    "time": "时间",
+    "allDay": "全天",
+    "place": "地点 / 和谁（可不填）",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "errors": {
+      "name": "请输入活动名称。",
+      "category": "请选择一个类别。",
+      "datePast": "这一天已经过去了，请选今天或以后的日子。",
+      "timePast": "这个时间已经过去了，请选晚一点的时间。",
+      "categoryName": "请输入类别名称。"
+    }
+  },
+  "datePicker": {
+    "prevDay": "前一天",
+    "nextDay": "后一天",
+    "prevWeek": "前一周",
+    "nextWeek": "后一周",
+    "prevMonth": "前一个月",
+    "nextMonth": "后一个月"
+  },
+  "timePicker": {
+    "hourEarlier": "早1小时",
+    "hourLater": "晚1小时",
+    "minEarlier": "早5分钟",
+    "minLater": "晚5分钟"
+  },
+  "confirmDelete": {
+    "title": "要删除这个活动吗？",
+    "yes": "是的，删除",
+    "no": "不，保留"
+  },
+  "quick": {
+    "title": "快速添加",
+    "stepOf": "第{n}步，共4步",
+    "step1": "是什么活动？",
+    "types": {
+      "doctor": "看医生",
+      "medicine": "吃药",
+      "exercise": "运动",
+      "meet": "见面",
+      "class": "上课",
+      "other": "其他"
+    },
+    "defaultTitle": {
+      "doctor": "看医生",
+      "medicine": "吃药",
+      "exercise": "运动",
+      "meet": "见面",
+      "class": "上课",
+      "other": "活动"
+    },
+    "step2": {
+      "doctor": "哪位医生或哪家诊所？",
+      "medicine": "在哪里吃药？",
+      "exercise": "在哪里运动？",
+      "meet": "您要见谁？",
+      "class": "什么课，或在哪里？",
+      "other": "在哪里，或和谁？"
+    },
+    "step2Hint": "这一题可以跳过。",
+    "step3": "哪一天？",
+    "today": "今天",
+    "tomorrow": "明天",
+    "pickDate": "选日期",
+    "step4": "几点？",
+    "morning": "上午",
+    "afternoon": "下午",
+    "evening": "傍晚",
+    "pickTime": "选时间",
+    "next": "下一步",
+    "skip": "跳过"
+  },
+  "confirm": {
+    "title": "这样对吗？",
+    "name": "活动",
+    "category": "类别",
+    "date": "日期",
+    "time": "时间",
+    "place": "地点 / 和谁",
+    "youSaid": "您说的是：“{text}”",
+    "yes": "是的，保存",
+    "change": "修改",
+    "notSet": "还没定",
+    "askTitle": "这个活动叫什么？",
+    "askDate": "哪一天？",
+    "askTime": "几点？"
+  },
+  "type": {
+    "title": "输入您的活动",
+    "label": "您想添加什么？",
+    "placeholder": "下星期二上午10点看医生",
+    "next": "下一步",
+    "reading": "正在读取您输入的内容…",
+    "empty": "请输入您想添加的内容。",
+    "failed": "看不懂这段文字，请检查一下内容。"
+  },
+  "speak": {
+    "title": "说出您的活动",
+    "ready": "按一下麦克风，然后说出您想添加的活动。",
+    "example": "例如：“{text}”",
+    "micStart": "按一下开始说话",
+    "listening": "正在听...",
+    "micStop": "说完了请按这里",
+    "processing": "正在处理…",
+    "heard": "我听到的是：",
+    "noSpeech": "没有听到声音。请按麦克风再试一次。",
+    "failed": "麦克风没有反应。请再试一次。",
+    "unsupported": "这个浏览器不能用说话输入。",
+    "denied": "这个页面没有使用麦克风的权限。",
+    "useType": "改用打字",
+    "cancel": "取消"
+  },
+  "reminder": {
+    "label": "提醒",
+    "ok": "好的，我知道了",
+    "snooze": "10分钟后再提醒我"
+  },
+  "notify": {
+    "title": "通知",
+    "hint": "开启通知后，就算这个页面在其他窗口后面，也能看到提醒。",
+    "allow": "允许通知",
+    "granted": "通知已开启。",
+    "denied": "通知被阻止了。您可以在浏览器设置里允许通知。",
+    "unsupported": "这个浏览器不能显示通知。"
+  }
+}
